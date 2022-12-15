@@ -20,19 +20,23 @@
                                                                        method="post">
                         <div class="row">
                             <div class="form-group col-md-8">
-                                <label for="name" class="col-form-label">SÃ©rie</label> 
-                                <input type="text" th:field="*{serie}" class="form-control"
+                                <label for="name" class="col-form-label">Série</label> 
+                                <input type="text" th:field="*{immatriculation}" class="form-control"
                                             id="serie" placeholder="Serie" />
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="name" class="col-form-label">Date de Mise Circulation</label> 
-                                <input type="date" th:field="*{dateMiseEnMarche}" class="form-control"
+                                <input type="date" th:field="*{dateMiseEnCirculation}" class="form-control"
                                             id="dateMiseEnMarche" placeholder="dateMiseEnMarche" />
                             </div>
-                            
+                            <div class="form-group col-md-8">
+                                <label for="name" class="col-form-label">Prix du jour</label> 
+                                <input type="text" th:field="*{prixJour}" class="form-control"
+                                            id="prixJour" placeholder="prix du jour" />
+                            </div>
                             
                            <div class="form-group col-md-8">
-                                <label for="name" class="col-form-label">ModÃ¨le</label> 
+                                <label for="name" class="col-form-label">Modèle</label> 
                                 <select th:field="*{model.id}" >
 									<option th:each="modele : ${modelList}" 
 										th:value="${modele.id}" th:text="${modele.id}" />

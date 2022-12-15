@@ -3,6 +3,7 @@ package com.tekup.location.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,31 +17,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.tekup.location.model.Modele;
 import com.tekup.location.model.Voiture;
 import com.tekup.location.services.ModeleService;
-import com.tekup.location.services.VoitureServiceImpl;
+import com.tekup.location.services.VoitureService;
+
 
 @Controller
+
 public class VoitureController {
 	
 	
+	@Autowired
+	private VoitureService voitureService;
 	
-	
+	@Autowired
+	private ModeleService modelService;
 	
 
 	
-	private VoitureServiceImpl voitureService;
-	private ModeleService modelService;
+	//private VoitureServiceImpl voitureService;
+	//private ModeleService modelService;
 	
-	@Autowired
+	/*@Autowired
 	public VoitureController(VoitureServiceImpl voitureService,ModeleService modelService) {
 		this.modelService=modelService;
 		this.voitureService=voitureService;
-	}
+	}*/
 	
 	//Ajouter une voiture 
 	
 	//1- Retourner un forumlaire d'ajout
 	
-	@RequestMapping("/addVoiture")
+	@GetMapping("/addVoiture")
 	public String addVoiture(Model model) {
 		
 		Voiture voiture = new Voiture();
