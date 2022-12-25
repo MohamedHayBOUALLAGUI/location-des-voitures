@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+//import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,21 +80,50 @@ public class VoitureController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws Exception {
         Voiture voiture = voitureService.getVoiture(id);
         model.addAttribute("voiture", voiture);
+        //Modele modele=voiture.getModel();
+        //model.addAttribute("modele",modele);
+        
+      List<Modele> listModel = modelService.listModel();
+      	model.addAttribute("modelList", listModel);
+      	
         return "update_voiture";
     }
 
     @PostMapping("update/{id}")
-    public String updateVoiture(@PathVariable("id") Integer id, Voiture voiture, BindingResult result,
-        Model model) {
-        if (result.hasErrors()) {
-            voiture.setId(id);
-            return "update_voiture";
-        }
+    public String updateVoiture(@PathVariable("id") Integer id, @ModelAttribute("voiture") Voiture voitureForm, Model model
+    		) throws Exception {
+ 
+    	
+    	Voiture voiture= voitureService.getVoiture(id);
+    	
+    	
+    	voiture.setId(voitureForm.getId());
+    	voiture.setImmatriculation(voitureForm.getImmatriculation());
+    	voiture.setDateMiseEnCirculation(voitureForm.getDateMiseEnCirculation());
+    	voiture.setModel(voitureForm.getModel());
+    	
+    	
+    	voiture.setPrixJour(voitureForm.getPrixJour());
+    	
+    	
 
         voitureService.saveVoiture(voiture);
         model.addAttribute("listVoitures", voitureService.listVoiture());
         return "redirect:/";
     }
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //-----------------------------------------------------------------------
 
     @GetMapping("delete/{id}")
     public String deleteVoiture(@PathVariable("id") Integer id, Model model) {
